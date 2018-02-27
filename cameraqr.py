@@ -1,33 +1,34 @@
 from io import BytesIO
-from time import sleep, time
+from time import sleep
 import picamera
 from PIL import Image
 import zbar
 
 running = True
 
+# Create a bytestream to store the image temporarily
 stream = BytesIO()
-scanner = zbar.ImageScanner()
 
+# Create the scanner
+scanner = zbar.ImageScanner()
 scanner.parse_config('enable')
 
-last = time()
-print(time() - last)
 with picamera.PiCamera() as camera:
-	camera.resolution = (camera.resolution[0] / 4, camera.resolution[1] / 4)
+	# Scaledown the resolution by 100 or 10 on each axis
+	camera.resolution = (camera.resolution[0] / 6, camera.resolution[1] / 6)
 	while running:
+		print("Reading...")
+		# We want to reuse the byte stream
 		stream.seek(0)
 		camera.capture(stream, format='jpeg')
+		
 		pil = Image.open(stream)
-
 		pil = pil.convert('L')
 		width, height = pil.size
 		raw = pil.tobytes()
 
-		# wrap image data
 		image = zbar.Image(width, height, 'Y800', raw)
 
-		# scan the image for barcodes
 		scanner.scan(image)
 		
 		# extract results
