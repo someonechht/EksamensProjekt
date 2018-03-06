@@ -23,6 +23,7 @@ with picamera.PiCamera() as camera:
 		camera.capture(stream, format='jpeg')
 		
 		pil = Image.open(stream)
+		pil = pil.convert('L')
 
 		results = scanner.scan(numpy.array(pil))
 		
