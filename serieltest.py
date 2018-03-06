@@ -35,4 +35,4 @@ thread.start()
 
 while True:
   input = raw_input('$: ')
-  command(ser, input)
+  ser.write(input + "\r")
