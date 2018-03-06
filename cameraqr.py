@@ -10,8 +10,7 @@ running = True
 stream = BytesIO()
 
 # Create the scanner
-scanner = zbar.ImageScanner()
-scanner.parse_config('enable')
+scanner = zbar.Scanner()
 
 with picamera.PiCamera() as camera:
 	# Scaledown the resolution by 100 or 10 on each axis
@@ -29,10 +28,10 @@ with picamera.PiCamera() as camera:
 
 		image = zbar.Image(width, height, 'Y800', raw)
 
-		scanner.scan(image)
+		results = scanner.scan(image)
 		
 		# extract results
-		for symbol in image:
+		for result in results:
 			# do something useful with results
-			print('decoded {} symbol "{}"'.format(symbol.type, symbol.data))
+			print('decoded {} symbol "{}"'.format(result.type, result.data))
 	
