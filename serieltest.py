@@ -1,5 +1,6 @@
 import serial
 import threading
+import sys
 
 def read_stream(ser):
   while True:
@@ -9,7 +10,11 @@ def read_stream(ser):
 def do_some_thing(line):
   print(line)
 
-ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0)
+dev = '/dev/ttyUSB0'
+if len(sys.argv) >= 1:
+  dev = sys.argv[0]
+
+ser = serial.Serial(dev, 38400, timeout=0)
 
 thread = threading.Thread(target=read_stream, args=(ser,))
 thread.daemon = True
