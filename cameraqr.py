@@ -15,7 +15,7 @@ scanner = zbar.Scanner()
 with picamera.PiCamera() as camera:
 	# Scaledown the resolution by 100 or 10 on each axis
 	camera.resolution = (camera.resolution[0] // 6, camera.resolution[1] // 6)
-	for foo in camera.capture_continuous(stream, 'jpeg', use_video_port=True):
+	for _ in camera.capture_continuous(stream, 'jpeg', use_video_port=True):
 		print("Reading...")
 		# We want to reuse the byte stream
 		stream.seek(0)
