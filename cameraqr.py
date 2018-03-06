@@ -34,5 +34,5 @@ with picamera.PiCamera() as camera:
 		# extract results
 		for symbol in image:
 			# do something useful with results
-			print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+			print('decoded {} symbol "{}"'.format(symbol.type, symbol.data))
 	
