@@ -1,6 +1,23 @@
 import serial
 import threading
 import sys
+import time
+
+def command(ser, s):
+  try:   
+    ser.flushInput()
+    ser.flushOutput()
+    for ch in s:
+      ser.write(ch)
+      time.sleep(0.001)
+    ser.write('\r')  
+    time.sleep(0.05)
+    #while ser.inWaiting() > 0:
+    for i in range(3):
+      print(ser.readline())
+  except Exception as e:
+    print "Error: {0}".format(e)
+    exit(0)
 
 def read_stream(ser):
   while True:
@@ -18,4 +35,4 @@ thread.start()
 
 while True:
   input = raw_input('$: ')
-  ser.write(input + "\r")
+  command(ser, input)
