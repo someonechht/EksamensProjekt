@@ -19,4 +19,4 @@ thread.start()
 
 while True:
   input = input('$: ')
-  ser.write((input + "\r").encode('utf-8'))
+  ser.write(bytes(input + "\r"))
