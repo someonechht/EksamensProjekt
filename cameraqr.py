@@ -25,7 +25,7 @@ with picamera.PiCamera() as camera:
 		pil = Image.open(stream)
 		pil = pil.convert('L')
 
-		results = scanner.scan(numpy.array(image))
+		results = scanner.scan(numpy.array(pil))
 		
 		# extract results
 		for result in results:
