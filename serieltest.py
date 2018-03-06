@@ -18,5 +18,5 @@ thread.daemon = True
 thread.start()
 
 while True:
-  input = input('$: ')
+  input = input("$: ")
   ser.write(input.encode('ascii') + b"\r\n")
