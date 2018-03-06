@@ -9,7 +9,7 @@ def read_stream(ser):
       do_some_thing(ser.readline())
 
 def do_some_thing(line):
-  print(line.decode('asicii'))
+  print(line.decode())
 
 ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0)
 
@@ -19,4 +19,4 @@ thread.start()
 
 while True:
   input = input("$: ")
-  ser.write(input.encode('ascii') + b"\r\n")
+  ser.write(input.encode() + b"\r\n")
