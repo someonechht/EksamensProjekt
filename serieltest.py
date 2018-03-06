@@ -18,4 +18,4 @@ thread.start()
 
 while True:
   input = raw_input('$: ')
-  ser.write(input)
+  ser.write(input + "\r")
