@@ -5,7 +5,8 @@ import time
 
 def read_stream(ser):
   while ser.is_open:
-    do_some_thing(ser.readline())
+    if ser.in_waiting > 0:
+      do_some_thing(ser.readline())
 
 def do_some_thing(line):
   print(line.decode())
