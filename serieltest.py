@@ -15,4 +15,9 @@ def do_some_thing(line):
 ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0)
 
 thread = threading.Thread(target=read_stream, args=(ser,))
+thread.daemon = True
 thread.start()
+
+while True:
+  input = raw_input('$: ')
+  ser.write(input)
