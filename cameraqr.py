@@ -16,6 +16,8 @@ scanner = zbar.Scanner()
 with picamera.PiCamera() as camera:
 	# Scaledown the resolution by 100 or 10 on each axis
 	camera.resolution = (camera.resolution[0] // 6, camera.resolution[1] // 6)
+	# Turn it grayscale
+	camera.color_effects = (128,128) 
 	while running:
 		print("Reading...")
 		# We want to reuse the byte stream
@@ -26,9 +28,6 @@ with picamera.PiCamera() as camera:
 		pil = pil.convert('L')
 
 		results = scanner.scan(numpy.array(pil))
-		
-		if not results:
-			continue
 
 		# extract results
 		for result in results:
