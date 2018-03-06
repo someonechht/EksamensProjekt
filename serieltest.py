@@ -1,6 +1,7 @@
 import serial
 import threading
 
+commands = []
 
 def read_stream(ser):
   while True:
@@ -8,7 +9,8 @@ def read_stream(ser):
       do_some_thing(ser.readline())
 
 def do_some_thing(line):
-  print(line)
+  commands.append(line)
+  print(commands)
 
 ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0)
 
