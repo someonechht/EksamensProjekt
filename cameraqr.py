@@ -26,7 +26,7 @@ with picamera.PiCamera() as camera:
 
 		results = scanner.scan(numpy.array(pil))
 		
-		if !results:
+		if not results:
 			continue
 
 		# extract results
