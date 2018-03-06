@@ -9,7 +9,7 @@ def read_stream(ser):
       do_some_thing(ser.readline())
 
 def do_some_thing(line):
-  print(line)
+  print(line.decode('asicii'))
 
 ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0)
 
