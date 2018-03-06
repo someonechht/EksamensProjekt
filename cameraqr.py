@@ -3,6 +3,7 @@ from time import sleep
 import picamera
 from PIL import Image
 import zbar
+import numpy
 
 running = True
 
@@ -23,12 +24,8 @@ with picamera.PiCamera() as camera:
 		
 		pil = Image.open(stream)
 		pil = pil.convert('L')
-		width, height = pil.size
-		raw = pil.tobytes()
 
-		image = zbar.Image(width, height, 'Y800', raw)
-
-		results = scanner.scan(image)
+		results = scanner.scan(numpy.array(image))
 		
 		# extract results
 		for result in results:
